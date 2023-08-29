@@ -1,4 +1,4 @@
-package assignment.truck;
+package assignment.container;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -6,8 +6,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataSaver {
-    public static void saveData(List<Truck> containers, String filePath) {
+public class DataSave {
+    public static void saveData(List<Container> containers, String filePath) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filePath))) {
             out.writeObject(containers);
             System.out.println("Data saved successfully.");
@@ -17,15 +17,17 @@ public class DataSaver {
     }
 
     public static void main(String[] args) {
-        List<Truck> trucks = new ArrayList<>();
+        List<Container> containers = new ArrayList<>();
 
-        Truck truck = new Truck(11.2, "tr-12", "basic");
-        Truck truck2 = new Truck(13.2, "tr-25", "reefer");
+        Container container1 = new Container("con1", "con-1", "dryStorage", 25.2, 13.2);
+        Container container2 = new Container("con2", "con-2", "coolStorage", 22.5, 14.0);
 
-        trucks.add(truck);
-        trucks.add(truck2);
+        containers.add(container1);
+        containers.add(container2);
 
-        String filePath = "trucks.txt";
-        saveData(trucks, filePath);
+        String filePath = "containers.txt";
+        saveData(containers, filePath);
     }
 }
+
+

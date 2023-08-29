@@ -1,14 +1,14 @@
-package assignment.truck;
+package assignment.container;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.List;
 
-public class DataLoader {
-    public static List<Truck> loadData(String filePath) {
+public class DataLoad {
+    public static List<Container> loadData(String filePath) {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
-            return (List<Truck>) in.readObject();
+            return (List<Container>) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
@@ -16,11 +16,11 @@ public class DataLoader {
     }
 
     public static void main(String[] args) {
-        String filePath = "trucks.txt";
-        List<Truck> loadedContainers = loadData(filePath);
+        String filePath = "containers.txt";
+        List<Container> loadedContainers = loadData(filePath);
 
         if (loadedContainers != null) {
-            for (Truck container : loadedContainers) {
+            for (Container container : loadedContainers) {
                 System.out.println(container.toString());
             }
         } else {
@@ -28,3 +28,4 @@ public class DataLoader {
         }
     }
 }
+

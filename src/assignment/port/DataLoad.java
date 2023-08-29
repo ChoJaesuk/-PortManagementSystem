@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.List;
 
-public class DataLoader {
+public class DataLoad {
     public static List<Port> loadData(String filePath) {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
             return (List<Port>) in.readObject();
