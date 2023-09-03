@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class User {
@@ -14,42 +15,57 @@ public class User {
         this.role = role;
         this.userName = userName;
         this.password = password;
-        if(role == "admin"){
-            saveAdmin();
-        } else if (role == "portmanager") {
-            savePortManager();
+        SaveUser();
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    private void SaveUser() throws IOException {
+        PrintWriter output = new PrintWriter(new FileWriter("/src/Data/Users.txt", true));
+        output.println(this.role + " " + this.userName + " " + this.password);
+        output.flush();
+        output.close();
+
+    }
+    public void LoadAllUsers() throws IOException {
+        LoadAllAdmins();
+        LoadAllPortManagers();
+    }
+    public void LoadAllAdmins() throws IOException {
+        ListByRoles("Admin");
+    }
+    public void  LoadAllPortManagers() throws IOException{
+        ListByRoles("PortManager");
+    }
+    public void ListByRoles(String role) throws IOException{
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src/Data/Users.txt"));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] lines = line.split(" ");
+                if (lines[0] == " "+role) {
+                    String username = lines[1];
+                    System.out.println(" "+role+ "User name: " + username);
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
-    private void saveAdmin() throws IOException {
-        PrintWriter output = new PrintWriter(new FileWriter("/src/Data/admin.txt", true));
-        output.println(this.role + " " + this.userName + " " + this.password);
-        output.flush();
-        output.close();
+    public void ListAllTrips() throws IOException{
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src/Port1/Data/Histoy.txt"));
+            String line = reader.readLine();
+            while (line != null) {
+                String[] lines = line.split(":");
+                System.out.println(line);
+                }
+            } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-    private void savePortManager() throws IOException {
-        PrintWriter output = new PrintWriter(new FileWriter("/src/Data/PortManager.txt", true));
-        output.println(this.role + " " + this.userName + " " + this.password);
-        output.flush();
-        output.close();
-
     }
-//    public void loadUser(){
-//                Object obj = null;
-//        ArrayList<Student> studentList = new ArrayList<Student>();
-//        FileInputStream fi = new FileInputStream("students.obj");
-//        ObjectInputStream studentIn = new ObjectInputStream(fi);
-//        while (true) {
-//            try {
-//                obj = studentIn.readObject();
-//                studentList.add((Student) obj);
-//            } catch (EOFException e) {
-//                System.out.println("Finished reading all the objects!!!");
-//                break;
-//            }
-//        }
-//        for (Student s: studentList){
-//            System.out.println(s.getName() + " " + s.getMajor() + " " + s.getGpa());
-//        }
-//    }
 
-}

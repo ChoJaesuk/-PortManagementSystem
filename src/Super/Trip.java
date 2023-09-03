@@ -28,15 +28,14 @@ public abstract class Trip {
         DeparturePort = null;
         ArrivalPort = null;
     }
-    public Trip(String ID, LocalDate DepartureDate, LocalDate ArrivalDate, Vehicle Vehicle, Port DeparturePort, Port ArrivalPort){
+    public Trip(String ID, LocalDate DepartureDate, LocalDate ArrivalDate, Vehicle vehicle, Port DeparturePort, Port ArrivalPort) throws IOException {
         this.ID = ID;
         this.DepartureDate = DepartureDate;
         this.ArrivalDate = ArrivalDate;
-        this.VehicleID = Vehicle.ID;
+        this.VehicleID = vehicle.ID;
         this.DeparturePort = DeparturePort;
         this.ArrivalPort = ArrivalPort;
-        this.Containers = Vehicle.Containers;
-
+        this.Containers = vehicle.Containers;
     }
 
     @Override
@@ -55,7 +54,7 @@ public abstract class Trip {
 
     public void save(String portNumber) throws IOException {
         PrintWriter output = new PrintWriter(new FileWriter("/src/"+portNumber+"/Data/History.txt", true));
-        output.println(this);
+        output.println(this.ID+":"+this.VehicleID+":"+this.Status+":"+DepartureDate+":"+this.ArrivalDate+":"+this.DeparturePort+":"+this.ArrivalPort+":"+this.Containers);
         output.flush();
         output.close();
     }

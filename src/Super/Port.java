@@ -23,8 +23,7 @@ public class Port implements Serializable{
         this.Latitude = Latitude;
         this.StoringCapacity = StoringCapacity;
     }
-    public static String printAllFilesStartWith(String startWord,String path) {
-        String filepath = "./src/Port1/Truck";
+    public String printAllFilesStartWith(String startWord,String filepath) {
         File folder = new File(filepath);
         File[] FileList = folder.listFiles();
         ArrayList<Object> results = new ArrayList<>();

@@ -22,6 +22,8 @@ public class Port1Ship extends Ship implements Save {
     public Port1Ship(String ID, Double capacity){
         this.ID = ID;
         this.capacity = capacity;
+        save("/src/Port1/Data",""+this.ID,this);
+
     }
     @Override
     public void loadContainer(Container container) {

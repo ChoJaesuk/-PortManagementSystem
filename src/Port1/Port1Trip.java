@@ -36,10 +36,10 @@ public class Port1Trip extends Trip{
         this.DeparturePort = DeparturePort;
         this.ArrivalPort = ArrivalPort;
         this.Containers = Vehicle.Containers;
-        Port1MoveFile(""+VehicleID,""+ArrivalPort);
+        Port1MoveFile(VehicleID, String.valueOf(ArrivalPort));
         for(Container container :Containers){
             String ContainerID = container.getID();
-            Port1MoveFile(""+ContainerID+".txt",""+ArrivalPort);
+            Port1MoveFile(ContainerID+".txt", String.valueOf(ArrivalPort));
         }
     }
 
@@ -64,7 +64,7 @@ public class Port1Trip extends Trip{
     @Override
     public void save() throws IOException {
         PrintWriter output = new PrintWriter(new FileWriter("/src/Port1/Data/History.txt", true));
-        output.println(this);
+        output.println(this.ID+":"+this.VehicleID+":"+this.Status+":"+DepartureDate+":"+this.ArrivalDate+":"+this.DeparturePort+":"+this.ArrivalPort+":"+this.Containers);
         output.flush();
         output.close();
     }
